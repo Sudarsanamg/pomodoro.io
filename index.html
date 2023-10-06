@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+    <link rel="icon" href="single-tomato-image-with-black-background.png">
+    <style>
+        body
+        {   
+            background-color: black;
+            background-repeat: repeat;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        .start-timer,.stop-button
+        {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 10px ;
+            font-weight: 600;
+            transition: 0.3s;
+            border-style: solid;
+            border-bottom: 15px solid white;
+        }
+        .start-timer:hover,.stop-button:hover
+        {
+            color: black;
+            background-color: white;
+            
+        }
+        .start-timer:active,.stop-button:active{
+            border-bottom: 0px  white;
+            border-bottom-style: none;
+        }
+        .ws
+        {
+            font-size: 18px;
+        }
+        .time-remaining
+        {
+            
+            font-size: 32px;
+            text-decoration: underline;
+        }
+        .time
+        {
+            font-size: 64px;
+            margin-top: auto;
+            color: red;
+        }
+        
+
+        
+    </style>
+</head>
+<body>
+    <script>
+
+        let m=0;
+        let s=5;
+        let t;
+        let ms;
+        let ss;
+        
+        function count()
+        {
+           s--;
+           ms=m.toString();
+           ss=s.toString();
+           if(m<10)
+           {
+            ms=m.toString().padStart(2,'0');
+           }
+           if(s<10)
+           {
+            ss=s.toString().padStart(2,'0');
+           }
+            document.querySelector('.time').innerHTML=`${ms}:${ss}`;
+            if(s===0 && m>0)
+            {
+                s=59;
+                m--;
+            }
+            if(s===0 && m===0)
+            {
+                clearInterval(t);
+                playSound();
+            }
+z
+        }
+    
+    
+        function playSound()
+        {
+            let audio=document.querySelector('.audio')
+            audio.play();
+        }
+        function stop()
+        {   
+            clearInterval(t);
+            let audio=document.querySelector('.audio')
+            audio.pause();
+            audio.currentTime = 0;
+        }
+        
+   
+    </script>
+    <center>
+    <button class="start-timer" onclick=" t=setInterval(count,1000);">Start</button>
+        <p class="ws">Work Slot:0/4</p>
+        <p class="time-remaining">Time Remaining</p>
+        <p class="time">25:00</p>
+    <button class="stop-button" onclick="stop()">Stop</button>
+    <audio src="mixkit-classic-winner-alarm-1997.wav" style="display: none;" class="audio"></audio>
+    </center>
+</body>
+</html>
